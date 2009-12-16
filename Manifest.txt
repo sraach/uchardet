@@ -1,0 +1,11 @@
+History.txt
+Manifest.txt
+PostInstall.txt
+README.rdoc
+Rakefile
+lib/chardet-icu.rb
+script/console
+script/destroy
+script/generate
+test/test_chardet-icu.rb
+test/test_helper.rb
