@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/test_helper.rb'
 
-class TestChardetIcu < Test::Unit::TestCase
+class TestUChardet < Test::Unit::TestCase
 
   def setup
   end

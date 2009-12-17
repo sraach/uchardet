@@ -3,9 +3,9 @@ Manifest.txt
 PostInstall.txt
 README.rdoc
 Rakefile
-lib/chardet-icu.rb
+lib/uchardet.rb
 script/console
 script/destroy
 script/generate
-test/test_chardet-icu.rb
+test/test_uchardet.rb
 test/test_helper.rb
