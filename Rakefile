@@ -5,17 +5,12 @@ require 'fileutils'
 require './lib/uchardet'
 
 Hoe.plugin :newgem
-# Hoe.plugin :website
-# Hoe.plugin :cucumberfeatures
 
 # Generate all the Rake tasks
 # Run 'rake -T' to see list of generated tasks (from gem root directory)
 $hoe = Hoe.spec 'uchardet' do
   self.developer 'Dmitri Goutnik', 'dg@syrec.org'
-  self.post_install_message = 'PostInstall.txt'   # TODO remove if post-install message not required
-  self.rubyforge_name       = self.name           # TODO this is default value
-  # self.extra_deps         = [['activesupport','>= 2.0.2']]
-
+  self.rubyforge_name = self.name
 end
 
 require 'newgem/tasks'
