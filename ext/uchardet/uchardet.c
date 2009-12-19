@@ -39,7 +39,7 @@ UCharsetDetector_alloc(VALUE klass)
  * call-seq:
  *   input_filtered
  *
- *  Return filtering flag value this charset detector.
+ * Return filtering flag value this charset detector.
  */
 static VALUE
 UCharsetDetector_get_input_filtered(VALUE self)
@@ -292,8 +292,7 @@ UCharsetDetector_detect_all(int argc, VALUE *argv, VALUE self)
  * call-seq:
  *   detectable_charsets
  *
- * Get array of names of all detectable charsets that are known to the
- * charset detection service.
+ * Get array of names of all detectable charsets that are known to the charset detection service.
  */
 static VALUE
 UCharsetDetector_get_detectable_charsets(VALUE self)
@@ -318,6 +317,8 @@ UCharsetDetector_get_detectable_charsets(VALUE self)
     return ary;
 }
 
+/*
+*/
 void
 Init_uchardet()
 {
