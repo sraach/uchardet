@@ -10,7 +10,7 @@ static VALUE cUChardetError;
 static VALUE cUCharsetDetector;
 
 static void
-assure(UErrorCode status)
+ensure(UErrorCode status)
 {
     if (U_FAILURE(status)) {
         VALUE ex = rb_exc_new2(cUChardetError, u_errorName(status));
@@ -30,7 +30,7 @@ UCharsetDetector_alloc(VALUE klass)
 {
     UErrorCode status = U_ZERO_ERROR;
     UCharsetDetector* detector = ucsdet_open(&status);
-    assure(status);
+    ensure(status);
 
     return Data_Wrap_Struct(klass, NULL, UCharsetDetector_free, detector);
 }
@@ -90,7 +90,6 @@ static VALUE
 UCharsetDetector_set_text(VALUE self, VALUE text)
 {
     return rb_iv_set(self, "@text", text);
-    return text;
 }
 
 /*
@@ -118,7 +117,6 @@ static VALUE
 UCharsetDetector_set_declared_encoding(VALUE self, VALUE declared_encoding)
 {
     return rb_iv_set(self, "@declared_encoding", declared_encoding);
-    return declared_encoding;
 }
 
 static void
@@ -132,7 +130,7 @@ set_text(VALUE self, VALUE text)
         Data_Get_Struct(self, UCharsetDetector, detector);
         
         ucsdet_setText(detector, StringValuePtr(text), RSTRING_LEN(text), &status);
-        assure(status);
+        ensure(status);
         
         UCharsetDetector_set_text(self, text);
     }
@@ -149,7 +147,7 @@ set_declared_encoding(VALUE self, VALUE declared_encoding)
         Data_Get_Struct(self, UCharsetDetector, detector);
 
         ucsdet_setDeclaredEncoding(detector, StringValuePtr(declared_encoding), RSTRING_LEN(declared_encoding), &status);
-        assure(status);
+        ensure(status);
         
         UCharsetDetector_set_declared_encoding(self, declared_encoding);
     }
@@ -211,16 +209,16 @@ UCharsetDetector_detect(int argc, VALUE *argv, VALUE self)
     Data_Get_Struct(self, UCharsetDetector, detector);
     
     const UCharsetMatch *match = ucsdet_detect(detector, &status);
-    assure(status);
+    ensure(status);
         
     const char *encoding_name = ucsdet_getName(match, &status);
-    assure(status);
+    ensure(status);
 
     int32_t encoding_confidence = ucsdet_getConfidence(match, &status);
-    assure(status);
+    ensure(status);
         
     const char *encoding_language = ucsdet_getLanguage(match, &status);
-    assure(status);
+    ensure(status);
         
     VALUE hash = rb_hash_new();
     rb_hash_aset(hash, ID2SYM(rb_intern("encoding")), rb_str_new2(encoding_name));
@@ -262,20 +260,20 @@ UCharsetDetector_detect_all(int argc, VALUE *argv, VALUE self)
     int32_t matches_found;
     
     const UCharsetMatch **matches = ucsdet_detectAll(detector, &matches_found, &status);
-    assure(status);
+    ensure(status);
     
     VALUE ary = rb_ary_new();
     int i = 0;
     
     for (i = 0; i < matches_found; i++) {
         const char *encoding_name = ucsdet_getName(matches[i], &status);
-        assure(status);
+        ensure(status);
 
         int32_t encoding_confidence = ucsdet_getConfidence(matches[i], &status);
-        assure(status);
+        ensure(status);
         
         const char *encoding_language = ucsdet_getLanguage(matches[i], &status);
-        assure(status);
+        ensure(status);
         
         VALUE hash = rb_hash_new();
         rb_hash_aset(hash, ID2SYM(rb_intern("encoding")), rb_str_new2(encoding_name));
@@ -302,14 +300,14 @@ UCharsetDetector_get_detectable_charsets(VALUE self)
     UErrorCode status = U_ZERO_ERROR;
     
     UEnumeration *charsets = ucsdet_getAllDetectableCharsets(detector, &status);
-    assure(status);
+    ensure(status);
     
     VALUE ary = rb_ary_new();
     int32_t result_length;
     const char *charset_name;
     
     while (charset_name = uenum_next(charsets, &result_length, &status)) {
-        assure(status);
+        ensure(status);
         rb_ary_push(ary, rb_str_new2(charset_name));
     }
     uenum_close(charsets);
