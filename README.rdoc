@@ -1,6 +1,8 @@
 = uchardet
 
+* http://rubyforge.org/projects/uchardet/
 * http://github.com/invisiblellama/uchardet
+* http://uchardet.rubyforge.org/rdoc/
 
 == DESCRIPTION:
 
