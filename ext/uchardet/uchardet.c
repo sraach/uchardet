@@ -157,7 +157,7 @@ set_declared_encoding(VALUE self, VALUE declared_encoding)
  * call-seq:
  *   new(text=nil, declared_encoding=nil)
  *
- * Create a new charset detector. Optionally set input text and declared encoding.
+ * Create a new charset detector. Optionally set the input text and declared encoding.
  */
 static VALUE
 UCharsetDetector_initialize(int argc, VALUE *argv, VALUE self)

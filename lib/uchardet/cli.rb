@@ -44,7 +44,6 @@ module Uchardet
         
           @options[:path] = args.last
           if @options[:path].nil? || @options[:path].empty?
-            @stdout.puts opts
             STDERR.puts "ERROR: please specify a file path."
             exit
           end
