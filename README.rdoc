@@ -1,6 +1,6 @@
 = uchardet
 
-* http://github.com/invisiblellama/uchardet/tree/master
+* http://github.com/invisiblellama/uchardet
 
 == DESCRIPTION:
 
