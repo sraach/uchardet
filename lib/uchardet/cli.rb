@@ -65,9 +65,9 @@ module Uchardet
 
       source = IO.read(@options[:path])
       matches = if @options[:detect_all]
-        detector.detect_all source
+        detector.detect_all(source)
       else
-        [detector.detect source]
+        [detector.detect(source)]
       end
       
       matches.each do |match|

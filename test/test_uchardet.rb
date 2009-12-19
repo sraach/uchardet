@@ -2,7 +2,7 @@
 
 require File.dirname(__FILE__) + '/test_helper.rb'
 
-class TestUchardet < Test::Unit::TestCase
+class TestUchardet < Test::Unit::TestCase   # :nodoc:
 
   def test_detect
     detector = ICU::UCharsetDetector.new

@@ -5,7 +5,7 @@ require "test/unit"
 $:.unshift File.dirname(__FILE__) + "/../ext/uchardet"
 require "uchardet.so"
 
-class TestUchardetExtn < Test::Unit::TestCase
+class TestUchardetExtn < Test::Unit::TestCase   # :nodoc:
   
   def test_init
     assert_not_nil(ICU::UCharsetDetector)
@@ -32,6 +32,9 @@ class TestUchardetExtn < Test::Unit::TestCase
   
   def test_detect
     detector = ICU::UCharsetDetector.new
+    assert_raise(ICU::Error) do
+      detector.detect
+    end
     e = detector.detect '∂∆∂∆∂∆'
     assert(e.is_a? Hash)
     assert(e.has_key? :encoding)
@@ -46,6 +49,9 @@ class TestUchardetExtn < Test::Unit::TestCase
   
   def test_detect_all
     detector = ICU::UCharsetDetector.new
+    assert_raise(ICU::Error) do
+      detector.detect_all
+    end
     a = detector.detect_all '€‹€‹€'
     assert(a.is_a? Array)
     assert_equal(false, a.empty?)
@@ -73,12 +79,16 @@ class TestUchardetExtn < Test::Unit::TestCase
     assert_equal('blah', detector.text)
     detector.text = 'test'
     assert_equal('test', detector.text)
+    detector.detect
+    assert_equal('test', detector.text)
   end
   
   def test_declared_encoding_accessor
     detector = ICU::UCharsetDetector.new
     assert_equal(nil, detector.declared_encoding)
     detector.declared_encoding = 'iso-8859-15'
+    assert_equal('iso-8859-15', detector.declared_encoding)
+    detector.detect 'test'
     assert_equal('iso-8859-15', detector.declared_encoding)
   end
   

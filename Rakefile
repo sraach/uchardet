@@ -10,6 +10,8 @@ Hoe.plugin :newgem
 # Run 'rake -T' to see list of generated tasks (from gem root directory)
 $hoe = Hoe.spec 'uchardet' do
   self.developer 'Dmitri Goutnik', 'dg@syrec.org'
+  self.readme_file = 'README.rdoc'
+  self.extra_rdoc_files = ['README.rdoc']
   self.rubyforge_name = self.name
 end
 
